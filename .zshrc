@@ -136,6 +136,9 @@ alias dirs='dirs -v'
 alias pu="pushd"
 alias po="popd"
 
+# hubコマンドエイリアスをgitコマンドにかける
+eval "$(hub alias -s)"
+
 # sudo の後のコマンドでエイリアスを有効にする
 alias sudo='sudo '
 
@@ -178,6 +181,7 @@ zstyle ':completion:*' remote-access false
 zstyle ':completion:*' completer _oldlist _complete _match _ignored \
     _list _history
 zstyle ':completion:sudo:*' environ PATH="$SUDO_PATH:$PATH"
+fpath=(~/dotfiles/.zsh/completions $fpath) # hubの補完
 autoload -U compinit
 compinit
 
