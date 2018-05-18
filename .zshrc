@@ -152,25 +152,6 @@ function peco-z-search
   fi
 }
 zle -N peco-z-search
-bindkey '^f' peco-z-search
-
-## よく移動するディレクトリ一覧をインクリメントサーチ & 移動
-bindkey '^@' anyframe-widget-cdr
-## bash history一覧インクリメントサーチ & 実行
-bindkey '^r' anyframe-widget-execute-history
-## branch一覧をインクリメントサーチ & checkout
-bindkey '^b' anyframe-widget-checkout-git-branch
-## プロセス一覧をインクリメントサーチ & kill
-bindkey '^x^k' anyframe-widget-kill
-## deleteキー
-bindkey "^[[3~" delete-char
-
-# history-substring-search有効化
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
-
-# キーバインディングをemacs風に(-vはvim)
-bindkey -e
 
 # 補完全般とauto-fu.zsh
 setopt   auto_list auto_param_slash list_packed rec_exact
@@ -188,11 +169,6 @@ zstyle ':completion:sudo:*' environ PATH="$SUDO_PATH:$PATH"
 fpath=(~/dotfiles/.zsh/completions $fpath) # hubの補完
 autoload -U compinit
 compinit
-
-function zle-line-init () {
-    auto-fu-init
-}
-zle -N zle-line-init
 
 zstyle ':auto-fu:highlight' input bold
 zstyle ':auto-fu:highlight' completion fg=white
@@ -216,5 +192,23 @@ if [ -e $dir ]; then
     plugins+=(zsh-completions)
     autoload -U compinit && compinit
 fi
+
+# キーバインディングの設定
+bindkey '^f' peco-z-search
+## よく移動するディレクトリ一覧をインクリメントサーチ & 移動
+bindkey '^@' anyframe-widget-cdr
+## bash history一覧インクリメントサーチ & 実行
+bindkey '^r' anyframe-widget-execute-history
+## branch一覧をインクリメントサーチ & checkout
+bindkey '^b' anyframe-widget-checkout-git-branch
+## プロセス一覧をインクリメントサーチ & kill
+bindkey '^x^k' anyframe-widget-kill
+## deleteキー
+bindkey "^[[3~" delete-char
+# history-substring-search有効化
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+# キーバインディングをemacs風に(-vはvim)
+bindkey -e
 
 [[ -z $DISABLE_AUTO_FU_COMPLETION ]] && source $HOME/dotfiles/.zsh.d/auto-fu-config.zsh
