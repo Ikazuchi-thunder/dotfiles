@@ -95,9 +95,6 @@ setopt hist_reduce_blanks
 autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
   add-zsh-hook chpwd chpwd_recent_dirs
 
-# キーバインディングをemacs風に(-vはvim)
-bindkey -e
-
 # プロンプト
 # PROMPT内で変数展開・コマンド置換・算術演算を実行する。
 setopt prompt_subst
@@ -168,6 +165,13 @@ bindkey '^x^k' anyframe-widget-kill
 ## deleteキー
 bindkey "^[[3~" delete-char
 
+# history-substring-search有効化
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# キーバインディングをemacs風に(-vはvim)
+bindkey -e
+
 # 補完全般とauto-fu.zsh
 setopt   auto_list auto_param_slash list_packed rec_exact
 unsetopt list_beep
@@ -194,38 +198,6 @@ zstyle ':auto-fu:highlight' input bold
 zstyle ':auto-fu:highlight' completion fg=white
 zstyle ':auto-fu:var' postdisplay ''
 
-function afu+cancel () {
-    afu-clearing-maybe
-    ((afu_in_p == 1)) && { afu_in_p=0; BUFFER="$buffer_cur" }
-}
-function bindkey-advice-before () {
-    local key="$1"
-    local advice="$2"
-    local widget="$3"
-    [[ -z "$widget" ]] && {
-        local -a bind
-        bind=(`bindkey -M main "$key"`)
-        widget=$bind[2]
-    }
-    local fun="$advice"
-    if [[ "$widget" != "undefined-key" ]]; then
-        local code=${"$(<=(cat <<"EOT"
-            function $advice-$widget () {
-                zle $advice
-                zle $widget
-            }
-            fun="$advice-$widget"
-EOT
-        ))"}
-        eval "${${${code//\$widget/$widget}//\$key/$key}//\$advice/$advice}"
-    fi
-    zle -N "$fun"
-    bindkey -M afu "$key" "$fun"
-}
-bindkey-advice-before "^G" afu+cancel
-bindkey-advice-before "^[" afu+cancel
-bindkey-advice-before "^J" afu+cancel afu+accept-line
-
 # pip zsh completion start
 function _pip_completion {
   local words cword
@@ -244,3 +216,5 @@ if [ -e $dir ]; then
     plugins+=(zsh-completions)
     autoload -U compinit && compinit
 fi
+
+[[ -z $DISABLE_AUTO_FU_COMPLETION ]] && source $HOME/dotfiles/.zsh.d/auto-fu-config.zsh
