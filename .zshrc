@@ -23,16 +23,6 @@ zplug yous/lime
 
 # pecoのframework
 zplug "mollifier/anyframe"
-## よく移動するディレクトリ一覧をインクリメントサーチ & 移動
-bindkey '^@' anyframe-widget-cdr
-## bash history一覧インクリメントサーチ & 実行
-bindkey '^r' anyframe-widget-execute-history
-## branch一覧をインクリメントサーチ & checkout
-bindkey '^b' anyframe-widget-checkout-git-branch
-## プロセス一覧をインクリメントサーチ & kill
-bindkey '^x^k' anyframe-widget-kill
-## deleteキー
-bindkey "^[[3~" delete-char
 
 # freqencyを考慮したファイル・フォルダ補完
 zplug "plugins/fasd", from:oh-my-zsh
@@ -166,6 +156,17 @@ function peco-z-search
 }
 zle -N peco-z-search
 bindkey '^f' peco-z-search
+
+## よく移動するディレクトリ一覧をインクリメントサーチ & 移動
+bindkey '^@' anyframe-widget-cdr
+## bash history一覧インクリメントサーチ & 実行
+bindkey '^r' anyframe-widget-execute-history
+## branch一覧をインクリメントサーチ & checkout
+bindkey '^b' anyframe-widget-checkout-git-branch
+## プロセス一覧をインクリメントサーチ & kill
+bindkey '^x^k' anyframe-widget-kill
+## deleteキー
+bindkey "^[[3~" delete-char
 
 # 補完全般とauto-fu.zsh
 setopt   auto_list auto_param_slash list_packed rec_exact
