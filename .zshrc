@@ -6,7 +6,6 @@ zplug "zsh-users/zsh-syntax-highlighting", defer:2
 # syntax-highlightning、greenは暗いので明るくする
 zplug "~/dotfiles/zsh_highlight_color_change", from:local, defer:2
 
-
 # 色拡張
 zplug chrissicool/zsh-256color
 
@@ -15,6 +14,7 @@ zplug b4b4r07/auto-fu.zsh
 
 # ヒストリ検索拡張
 zplug zsh-users/zsh-history-substring-search, defer:3
+
 # 補完対象強化
 zplug zsh-users/zsh-completions
 
@@ -185,13 +185,10 @@ fpath=(~/dotfiles/.zsh/completions $fpath) # hubの補完
 autoload -U compinit
 compinit
 
-if [ -f $ZPLUG_REPOS/b4b4r07/auto-fu.zsh/auto-fu.zsh ]; then
-    source $ZPLUG_REPOS/b4b4r07/auto-fu.zsh/auto-fu.zsh
-    function zle-line-init () {
-        auto-fu-init
-    }
-    zle -N zle-line-init
-fi
+function zle-line-init () {
+    auto-fu-init
+}
+zle -N zle-line-init
 
 zstyle ':auto-fu:highlight' input bold
 zstyle ':auto-fu:highlight' completion fg=white
