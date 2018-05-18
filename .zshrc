@@ -194,9 +194,10 @@ if [ -e $dir ]; then
 fi
 
 # キーバインディングの設定
+# キーバインディングをemacs風に(-vはvim)
+bindkey -e
+# ディレクトリインクリメントサーチ
 bindkey '^f' peco-z-search
-## よく移動するディレクトリ一覧をインクリメントサーチ & 移動
-bindkey '^@' anyframe-widget-cdr
 ## bash history一覧インクリメントサーチ & 実行
 bindkey '^r' anyframe-widget-execute-history
 ## branch一覧をインクリメントサーチ & checkout
@@ -208,7 +209,5 @@ bindkey "^[[3~" delete-char
 # history-substring-search有効化
 bindkey '^[[A' history-substring-search-up
 bindkey '^[[B' history-substring-search-down
-# キーバインディングをemacs風に(-vはvim)
-bindkey -e
 
 [[ -z $DISABLE_AUTO_FU_COMPLETION ]] && source $HOME/dotfiles/.zsh.d/auto-fu-config.zsh
