@@ -11,11 +11,10 @@ zplug "~/dotfiles/zsh_highlight_color_change", from:local, defer:2
 zplug chrissicool/zsh-256color
 
 # 自動補完
-# zplug hchbaw/auto-fu.zsh, at:next, as:command
-zplug b4b4r07/auto-fu.zsh, as:command
+zplug hchbaw/auto-fu.zsh, at:next
 
 # ヒストリ検索拡張
-zplug zsh-users/zsh-history-substring-search
+zplug zsh-users/zsh-history-substring-search, defer:3
 # 補完対象強化
 zplug zsh-users/zsh-completions
 
