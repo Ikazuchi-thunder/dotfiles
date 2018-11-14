@@ -15,3 +15,5 @@ eval "$(pyenv init -)"
 # Rust
 export PATH="$HOME/.cargo/bin:$PATH"
 export EDITOR=vim
+eval "$(pipenv --completion)"
+export PIPENV_VENV_IN_PROJECT=true
